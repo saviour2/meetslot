@@ -1,6 +1,7 @@
 <!doctype html>
 {% load static %}
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,13 +27,14 @@
 			flex-wrap: wrap;
 			margin-top: 4px;
 			padding: 8px 12px;
-			background: rgba(234,179,8,0.10);
-			border: 1.5px solid rgba(234,179,8,0.40);
+			background: rgba(234, 179, 8, 0.10);
+			border: 1.5px solid rgba(234, 179, 8, 0.40);
 			border-radius: 10px;
 			font-size: 0.82rem;
 			color: #854d0e;
 			font-weight: 600;
 		}
+
 		.suggest-chip {
 			background: #6366f1;
 			color: #fff;
@@ -46,7 +48,10 @@
 			transition: background 0.2s;
 			white-space: nowrap;
 		}
-		.suggest-chip:hover { background: #4f46e5; }
+
+		.suggest-chip:hover {
+			background: #4f46e5;
+		}
 
 		/* ── Custom time-picker ── */
 		.time-picker-label {
@@ -54,13 +59,14 @@
 			font-weight: 700;
 			color: var(--ink-700);
 		}
+
 		.time-picker-display {
 			display: flex;
 			align-items: center;
 			gap: 10px;
 			padding: 0.8rem 0.9rem;
 			border: 1.5px solid #d8d8d2;
-			background: rgba(255,255,255,0.86);
+			background: rgba(255, 255, 255, 0.86);
 			border-radius: 12px;
 			font-size: 0.95rem;
 			color: var(--ink-900);
@@ -68,24 +74,41 @@
 			transition: border-color 170ms ease, box-shadow 170ms ease;
 			user-select: none;
 		}
+
 		.time-picker-display:hover,
 		.time-picker-display.open {
 			border-color: var(--teal-500);
-			box-shadow: 0 0 0 4px rgba(46,164,168,0.2);
+			box-shadow: 0 0 0 4px rgba(46, 164, 168, 0.2);
 		}
-		.time-picker-display svg { flex-shrink: 0; }
-		.time-display-text { flex: 1; color: #888; }
-		.time-display-text.selected { color: var(--ink-900); font-weight: 600; }
+
+		.time-picker-display svg {
+			flex-shrink: 0;
+		}
+
+		.time-display-text {
+			flex: 1;
+			color: #888;
+		}
+
+		.time-display-text.selected {
+			color: var(--ink-900);
+			font-weight: 600;
+		}
+
 		.time-grid-wrap {
 			display: none;
 			border: 1.5px solid #d8d8d2;
 			border-radius: 14px;
-			background: rgba(255,255,255,0.97);
-			box-shadow: 0 12px 32px rgba(17,34,41,0.12);
+			background: rgba(255, 255, 255, 0.97);
+			box-shadow: 0 12px 32px rgba(17, 34, 41, 0.12);
 			overflow: hidden;
 			margin-top: -4px;
 		}
-		.time-grid-wrap.open { display: block; }
+
+		.time-grid-wrap.open {
+			display: block;
+		}
+
 		.time-period-label {
 			padding: 6px 12px 2px;
 			font-size: 0.7rem;
@@ -94,15 +117,17 @@
 			letter-spacing: 0.1em;
 			color: var(--teal-600);
 		}
+
 		.time-grid {
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
 			gap: 4px;
 			padding: 6px 8px 10px;
 		}
+
 		.time-btn {
-			background: rgba(255,255,255,0.7);
-			border: 1.5px solid rgba(27,56,66,0.12);
+			background: rgba(255, 255, 255, 0.7);
+			border: 1.5px solid rgba(27, 56, 66, 0.12);
 			border-radius: 10px;
 			padding: 7px 4px;
 			font-size: 0.78rem;
@@ -113,16 +138,18 @@
 			transition: background 150ms, border-color 150ms, color 150ms, transform 120ms;
 			text-align: center;
 		}
+
 		.time-btn:hover {
-			background: rgba(46,164,168,0.12);
+			background: rgba(46, 164, 168, 0.12);
 			border-color: var(--teal-500);
 			transform: translateY(-1px);
 		}
+
 		.time-btn.active {
 			background: linear-gradient(135deg, var(--teal-600), var(--teal-500));
 			border-color: transparent;
 			color: #fff;
-			box-shadow: 0 4px 12px rgba(29,122,134,0.28);
+			box-shadow: 0 4px 12px rgba(29, 122, 134, 0.28);
 		}
 
 		/* ── Recommendation panel ── */
@@ -135,32 +162,44 @@
 			margin-bottom: 6px;
 			margin-top: 12px;
 		}
+
 		.rec-grid {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 			gap: 8px;
 		}
+
 		.rec-card {
-			background: rgba(255,255,255,0.82);
-			border: 1.5px solid rgba(255,255,255,0.9);
+			background: rgba(255, 255, 255, 0.82);
+			border: 1.5px solid rgba(255, 255, 255, 0.9);
 			border-radius: 14px;
 			padding: 10px 12px;
 			cursor: pointer;
 			transition: transform 160ms, box-shadow 160ms, border-color 160ms;
-			box-shadow: 0 4px 12px rgba(17,34,41,0.07);
+			box-shadow: 0 4px 12px rgba(17, 34, 41, 0.07);
 			position: relative;
 			overflow: hidden;
 		}
+
 		.rec-card::before {
 			content: '';
 			position: absolute;
 			inset: 0;
-			background: linear-gradient(135deg, rgba(46,164,168,0.06), transparent);
+			background: linear-gradient(135deg, rgba(46, 164, 168, 0.06), transparent);
 			opacity: 0;
 			transition: opacity 160ms;
 		}
-		.rec-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(17,34,41,0.12); border-color: rgba(46,164,168,0.4); }
-		.rec-card:hover::before { opacity: 1; }
+
+		.rec-card:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 20px rgba(17, 34, 41, 0.12);
+			border-color: rgba(46, 164, 168, 0.4);
+		}
+
+		.rec-card:hover::before {
+			opacity: 1;
+		}
+
 		.rec-card-room {
 			font-size: 0.78rem;
 			font-weight: 800;
@@ -170,281 +209,298 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
+
 		.rec-card-time {
 			font-size: 0.88rem;
 			font-weight: 700;
 			color: var(--ink-900);
 		}
+
 		.rec-card-date {
 			font-size: 0.75rem;
 			color: var(--ink-700);
 			margin-top: 2px;
 		}
+
 		.rec-card-arrow {
 			position: absolute;
 			right: 10px;
 			top: 50%;
 			transform: translateY(-50%);
-			color: rgba(29,122,134,0.4);
+			color: rgba(29, 122, 134, 0.4);
 			font-size: 1rem;
 			transition: color 160ms, right 160ms;
 		}
-		.rec-card:hover .rec-card-arrow { color: var(--teal-500); right: 8px; }
+
+		.rec-card:hover .rec-card-arrow {
+			color: var(--teal-500);
+			right: 8px;
+		}
 
 		/* re-book card variant */
-		.rec-card.rebook { border-color: rgba(99,102,241,0.25); }
-		.rec-card.rebook .rec-card-room { color: #6366f1; }
-		.rec-card.rebook:hover { border-color: rgba(99,102,241,0.55); }
+		.rec-card.rebook {
+			border-color: rgba(99, 102, 241, 0.25);
+		}
+
+		.rec-card.rebook .rec-card-room {
+			color: #6366f1;
+		}
+
+		.rec-card.rebook:hover {
+			border-color: rgba(99, 102, 241, 0.55);
+		}
 	</style>
 </head>
+
 <body class="app-page">
-<header class="app-header">
-	<p class="app-logo">MeetSlot</p>
-	<nav>
-		<ul class="app-nav">
-			<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-			<li><a class="active" href="{% url 'booking' %}">Booking</a></li>
-			<li><a href="{% url 'status' %}">Status</a></li>
-		</ul>
-	</nav>
-	<form method="post" action="{% url 'logout' %}">
-		{% csrf_token %}
-		<button type="submit" class="logout-btn">Logout</button>
-	</form>
-</header>
-
-<main class="app-shell two-col">
-	<!-- ─── BOOKING FORM ─── -->
-	<section class="glass-card">
-		<p class="eyebrow">Plan A Session</p>
-		<h1>Booking Page</h1>
-
-		<form class="booking-form" id="bookingForm" method="post">
+	<header class="app-header">
+		<p class="app-logo">MeetSlot</p>
+		<nav>
+			<ul class="app-nav">
+				<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+				<li><a class="active" href="{% url 'booking' %}">Booking</a></li>
+				<li><a href="{% url 'status' %}">Status</a></li>
+			</ul>
+		</nav>
+		<form method="post" action="{% url 'logout' %}">
 			{% csrf_token %}
+			<button type="submit" class="logout-btn">Logout</button>
+		</form>
+	</header>
 
-			<!-- Meeting Title -->
-			<label for="meeting-title">Meeting Title</label>
-			<input
-				id="meeting-title"
-				name="meeting_title"
-				type="text"
-				placeholder="Sprint planning"
-				value="{{ prev_title }}"
-				required
-			/>
-			{% if error %}
-			<div class="title-caution" id="titleCaution">
-				⚠ {{ error }}
-				{% if suggested_title %}
-				&nbsp;
-				<button type="button" class="suggest-chip"
-					onclick="
+	<main class="app-shell two-col">
+		<!-- ─── BOOKING FORM ─── -->
+		<section class="glass-card">
+			<p class="eyebrow">Plan A Session</p>
+			<h1>Booking Page</h1>
+
+			<form class="booking-form" id="bookingForm" method="post">
+				{% csrf_token %}
+
+				<!-- Meeting Title -->
+				<label for="meeting-title">Meeting Title</label>
+				<input id="meeting-title" name="meeting_title" type="text" placeholder="Sprint planning"
+					value="{{ prev_title }}" required />
+				{% if error %}
+				<div class="title-caution" id="titleCaution">
+					⚠ {{ error }}
+					{% if suggested_title %}
+					&nbsp;
+					<button type="button" class="suggest-chip" onclick="
 						document.getElementById('meeting-title').value='{{ suggested_title }}';
 						document.getElementById('titleCaution').style.display='none';
 					">
-					Use "{{ suggested_title }}"
-				</button>
+						Use "{{ suggested_title }}"
+					</button>
+					{% endif %}
+				</div>
 				{% endif %}
+
+				<!-- Date -->
+				<label for="meeting-date">Date</label>
+				<input id="meeting-date" name="meeting_date" type="date" value="{{ prev_date }}" required />
+
+				<!-- Custom Time Picker -->
+				<label class="time-picker-label">Time</label>
+				<input type="hidden" id="meeting-time" name="meeting_time" value="{{ prev_time }}" required />
+
+				<div class="time-picker-display" id="timePickerToggle" onclick="toggleTimePicker()">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+						stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="10"></circle>
+						<polyline points="12 6 12 12 16 14"></polyline>
+					</svg>
+					<span class="time-display-text {% if prev_time %}selected{% endif %}" id="timeDisplayText">
+						{% if prev_time %}{{ prev_time }}{% else %}Select a time{% endif %}
+					</span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+						stroke="#888" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+						id="timeChevron">
+						<polyline points="6 9 12 15 18 9"></polyline>
+					</svg>
+				</div>
+
+				<div class="time-grid-wrap" id="timeGridWrap">
+					<p class="time-period-label">☀ Morning</p>
+					<div class="time-grid" id="timeGrid">
+						<button type="button" class="time-btn" data-value="07:00">7:00 AM</button>
+						<button type="button" class="time-btn" data-value="07:30">7:30 AM</button>
+						<button type="button" class="time-btn" data-value="08:00">8:00 AM</button>
+						<button type="button" class="time-btn" data-value="08:30">8:30 AM</button>
+						<button type="button" class="time-btn" data-value="09:00">9:00 AM</button>
+						<button type="button" class="time-btn" data-value="09:30">9:30 AM</button>
+						<button type="button" class="time-btn" data-value="10:00">10:00 AM</button>
+						<button type="button" class="time-btn" data-value="10:30">10:30 AM</button>
+						<button type="button" class="time-btn" data-value="11:00">11:00 AM</button>
+						<button type="button" class="time-btn" data-value="11:30">11:30 AM</button>
+					</div>
+					<p class="time-period-label">🌤 Afternoon</p>
+					<div class="time-grid">
+						<button type="button" class="time-btn" data-value="12:00">12:00 PM</button>
+						<button type="button" class="time-btn" data-value="12:30">12:30 PM</button>
+						<button type="button" class="time-btn" data-value="13:00">1:00 PM</button>
+						<button type="button" class="time-btn" data-value="13:30">1:30 PM</button>
+						<button type="button" class="time-btn" data-value="14:00">2:00 PM</button>
+						<button type="button" class="time-btn" data-value="14:30">2:30 PM</button>
+						<button type="button" class="time-btn" data-value="15:00">3:00 PM</button>
+						<button type="button" class="time-btn" data-value="15:30">3:30 PM</button>
+						<button type="button" class="time-btn" data-value="16:00">4:00 PM</button>
+						<button type="button" class="time-btn" data-value="16:30">4:30 PM</button>
+						<button type="button" class="time-btn" data-value="17:00">5:00 PM</button>
+						<button type="button" class="time-btn" data-value="17:30">5:30 PM</button>
+					</div>
+					<p class="time-period-label">🌙 Evening</p>
+					<div class="time-grid">
+						<button type="button" class="time-btn" data-value="18:00">6:00 PM</button>
+						<button type="button" class="time-btn" data-value="18:30">6:30 PM</button>
+						<button type="button" class="time-btn" data-value="19:00">7:00 PM</button>
+						<button type="button" class="time-btn" data-value="19:30">7:30 PM</button>
+						<button type="button" class="time-btn" data-value="20:00">8:00 PM</button>
+						<button type="button" class="time-btn" data-value="20:30">8:30 PM</button>
+						<button type="button" class="time-btn" data-value="21:00">9:00 PM</button>
+						<button type="button" class="time-btn" data-value="21:30">9:30 PM</button>
+					</div>
+				</div>
+
+				<!-- Room -->
+				<label for="room">Room</label>
+				<select id="room" name="room" required>
+					<option value="">Choose a room</option>
+					{% for room in rooms %}
+					<option value="{{ room.id }}" {% if prev_room==room.id|stringformat:"s" %}selected{% endif %}>{{
+						room.name }}</option>
+					{% endfor %}
+				</select>
+
+				<button type="submit" class="primary-btn full">
+					Confirm Booking
+				</button>
+			</form>
+		</section>
+
+		<!-- ─── RECOMMENDATIONS PANEL ─── -->
+		<section class="glass-card">
+			<h2>Smart Suggestions</h2>
+			<p class="panel-copy" style="font-size:0.85rem; margin-bottom:0;">
+				Click a card to instantly fill the form.
+			</p>
+
+			{% if available_suggestions %}
+			<p class="rec-section-label">⚡ Available Slots</p>
+			<div class="rec-grid">
+				{% for s in available_suggestions %}
+				<div class="rec-card" onclick="fillSlot('{{ s.date }}','{{ s.time_24 }}','{{ s.room_id }}')">
+					<div class="rec-card-room">{{ s.room_name }}</div>
+					<div class="rec-card-time">{{ s.time_display }}</div>
+					<div class="rec-card-date">{{ s.date_label }}</div>
+					<span class="rec-card-arrow">→</span>
+				</div>
+				{% endfor %}
 			</div>
 			{% endif %}
 
-			<!-- Date -->
-			<label for="meeting-date">Date</label>
-			<input id="meeting-date" name="meeting_date" type="date" value="{{ prev_date }}" required />
-
-			<!-- Custom Time Picker -->
-			<label class="time-picker-label">Time</label>
-			<input type="hidden" id="meeting-time" name="meeting_time" value="{{ prev_time }}" required />
-
-			<div class="time-picker-display" id="timePickerToggle" onclick="toggleTimePicker()">
-				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<circle cx="12" cy="12" r="10"></circle>
-					<polyline points="12 6 12 12 16 14"></polyline>
-				</svg>
-				<span class="time-display-text {% if prev_time %}selected{% endif %}" id="timeDisplayText">
-					{% if prev_time %}{{ prev_time }}{% else %}Select a time{% endif %}
-				</span>
-				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="timeChevron">
-					<polyline points="6 9 12 15 18 9"></polyline>
-				</svg>
-			</div>
-
-			<div class="time-grid-wrap" id="timeGridWrap">
-				<p class="time-period-label">☀ Morning</p>
-				<div class="time-grid" id="timeGrid">
-					<button type="button" class="time-btn" data-value="07:00">7:00 AM</button>
-					<button type="button" class="time-btn" data-value="07:30">7:30 AM</button>
-					<button type="button" class="time-btn" data-value="08:00">8:00 AM</button>
-					<button type="button" class="time-btn" data-value="08:30">8:30 AM</button>
-					<button type="button" class="time-btn" data-value="09:00">9:00 AM</button>
-					<button type="button" class="time-btn" data-value="09:30">9:30 AM</button>
-					<button type="button" class="time-btn" data-value="10:00">10:00 AM</button>
-					<button type="button" class="time-btn" data-value="10:30">10:30 AM</button>
-					<button type="button" class="time-btn" data-value="11:00">11:00 AM</button>
-					<button type="button" class="time-btn" data-value="11:30">11:30 AM</button>
+			{% if recent_bookings %}
+			<p class="rec-section-label">🔄 Re-book Recent</p>
+			<div class="rec-grid">
+				{% for b in recent_bookings %}
+				<div class="rec-card rebook" data-time="{{ b.meeting_time|time:'H:i' }}" data-room="{{ b.room.id }}"
+					data-title="{{ b.title }}"
+					onclick="fillRebook(this.dataset.time, this.dataset.room, this.dataset.title)">
+					<div class="rec-card-room">{{ b.room.name }}</div>
+					<div class="rec-card-time">{{ b.meeting_time|time:"g:i A" }}</div>
+					<div class="rec-card-date" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{
+						b.title }}</div>
+					<span class="rec-card-arrow">→</span>
 				</div>
-				<p class="time-period-label">🌤 Afternoon</p>
-				<div class="time-grid">
-					<button type="button" class="time-btn" data-value="12:00">12:00 PM</button>
-					<button type="button" class="time-btn" data-value="12:30">12:30 PM</button>
-					<button type="button" class="time-btn" data-value="13:00">1:00 PM</button>
-					<button type="button" class="time-btn" data-value="13:30">1:30 PM</button>
-					<button type="button" class="time-btn" data-value="14:00">2:00 PM</button>
-					<button type="button" class="time-btn" data-value="14:30">2:30 PM</button>
-					<button type="button" class="time-btn" data-value="15:00">3:00 PM</button>
-					<button type="button" class="time-btn" data-value="15:30">3:30 PM</button>
-					<button type="button" class="time-btn" data-value="16:00">4:00 PM</button>
-					<button type="button" class="time-btn" data-value="16:30">4:30 PM</button>
-					<button type="button" class="time-btn" data-value="17:00">5:00 PM</button>
-					<button type="button" class="time-btn" data-value="17:30">5:30 PM</button>
-				</div>
-				<p class="time-period-label">🌙 Evening</p>
-				<div class="time-grid">
-					<button type="button" class="time-btn" data-value="18:00">6:00 PM</button>
-					<button type="button" class="time-btn" data-value="18:30">6:30 PM</button>
-					<button type="button" class="time-btn" data-value="19:00">7:00 PM</button>
-					<button type="button" class="time-btn" data-value="19:30">7:30 PM</button>
-					<button type="button" class="time-btn" data-value="20:00">8:00 PM</button>
-					<button type="button" class="time-btn" data-value="20:30">8:30 PM</button>
-					<button type="button" class="time-btn" data-value="21:00">9:00 PM</button>
-					<button type="button" class="time-btn" data-value="21:30">9:30 PM</button>
-				</div>
-			</div>
-
-			<!-- Room -->
-			<label for="room">Room</label>
-			<select id="room" name="room" required>
-				<option value="">Choose a room</option>
-				{% for room in rooms %}
-				<option value="{{ room.id }}" {% if prev_room == room.id|stringformat:"s" %}selected{% endif %}>{{ room.name }}</option>
 				{% endfor %}
-			</select>
-
-			<button type="submit" class="primary-btn full">
-				Confirm Booking
-			</button>
-		</form>
-	</section>
-
-	<!-- ─── RECOMMENDATIONS PANEL ─── -->
-	<section class="glass-card">
-		<h2>Smart Suggestions</h2>
-		<p class="panel-copy" style="font-size:0.85rem; margin-bottom:0;">
-			Click a card to instantly fill the form.
-		</p>
-
-		{% if available_suggestions %}
-		<p class="rec-section-label">⚡ Available Slots</p>
-		<div class="rec-grid">
-			{% for s in available_suggestions %}
-			<div class="rec-card" onclick="fillSlot('{{ s.date }}','{{ s.time_24 }}','{{ s.room_id }}')">
-				<div class="rec-card-room">{{ s.room_name }}</div>
-				<div class="rec-card-time">{{ s.time_display }}</div>
-				<div class="rec-card-date">{{ s.date_label }}</div>
-				<span class="rec-card-arrow">→</span>
 			</div>
-			{% endfor %}
-		</div>
-		{% endif %}
+			{% endif %}
 
-		{% if recent_bookings %}
-		<p class="rec-section-label">🔄 Re-book Recent</p>
-		<div class="rec-grid">
-			{% for b in recent_bookings %}
-			<div class="rec-card rebook" data-time="{{ b.meeting_time|time:'H:i' }}" data-room="{{ b.room.id }}" data-title="{{ b.title }}" onclick="fillRebook(this.dataset.time, this.dataset.room, this.dataset.title)">
-				<div class="rec-card-room">{{ b.room.name }}</div>
-				<div class="rec-card-time">{{ b.meeting_time|time:"g:i A" }}</div>
-				<div class="rec-card-date" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ b.title }}</div>
-				<span class="rec-card-arrow">→</span>
-			</div>
-			{% endfor %}
-		</div>
-		{% endif %}
+			{% if not available_suggestions and not recent_bookings %}
+			<p class="empty-copy" style="margin-top:1rem;">No suggestions yet. Make your first booking!</p>
+			{% endif %}
+		</section>
+	</main>
 
-		{% if not available_suggestions and not recent_bookings %}
-		<p class="empty-copy" style="margin-top:1rem;">No suggestions yet. Make your first booking!</p>
-		{% endif %}
-	</section>
-</main>
+	<script>
+		/* ── Time Picker ── */
+		const hiddenInput = document.getElementById('meeting-time');
+		const displayText = document.getElementById('timeDisplayText');
+		const gridWrap = document.getElementById('timeGridWrap');
+		const toggleBtn = document.getElementById('timePickerToggle');
+		const chevron = document.getElementById('timeChevron');
+		let pickerOpen = false;
 
-<script>
-/* ── Time Picker ── */
-const hiddenInput  = document.getElementById('meeting-time');
-const displayText  = document.getElementById('timeDisplayText');
-const gridWrap     = document.getElementById('timeGridWrap');
-const toggleBtn    = document.getElementById('timePickerToggle');
-const chevron      = document.getElementById('timeChevron');
-let pickerOpen = false;
+		function toggleTimePicker() {
+			pickerOpen = !pickerOpen;
+			gridWrap.classList.toggle('open', pickerOpen);
+			toggleBtn.classList.toggle('open', pickerOpen);
+			chevron.style.transform = pickerOpen ? 'rotate(180deg)' : '';
+		}
 
-function toggleTimePicker() {
-	pickerOpen = !pickerOpen;
-	gridWrap.classList.toggle('open', pickerOpen);
-	toggleBtn.classList.toggle('open', pickerOpen);
-	chevron.style.transform = pickerOpen ? 'rotate(180deg)' : '';
-}
+		document.querySelectorAll('.time-btn').forEach(btn => {
+			const val = btn.dataset.value;
+			// Highlight previously selected time (after form error)
+			if (val === hiddenInput.value) btn.classList.add('active');
 
-document.querySelectorAll('.time-btn').forEach(btn => {
-	const val = btn.dataset.value;
-	// Highlight previously selected time (after form error)
-	if (val === hiddenInput.value) btn.classList.add('active');
+			btn.addEventListener('click', () => {
+				document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+				btn.classList.add('active');
+				hiddenInput.value = val;
+				displayText.textContent = btn.textContent.trim();
+				displayText.classList.add('selected');
+				// Close after picking
+				pickerOpen = false;
+				gridWrap.classList.remove('open');
+				toggleBtn.classList.remove('open');
+				chevron.style.transform = '';
+			});
+		});
 
-	btn.addEventListener('click', () => {
-		document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-		btn.classList.add('active');
-		hiddenInput.value = val;
-		displayText.textContent = btn.textContent.trim();
-		displayText.classList.add('selected');
-		// Close after picking
-		pickerOpen = false;
-		gridWrap.classList.remove('open');
-		toggleBtn.classList.remove('open');
-		chevron.style.transform = '';
-	});
-});
+		// Close picker when clicking outside
+		document.addEventListener('click', e => {
+			if (!toggleBtn.contains(e.target) && !gridWrap.contains(e.target) && pickerOpen) {
+				toggleTimePicker();
+			}
+		});
 
-// Close picker when clicking outside
-document.addEventListener('click', e => {
-	if (!toggleBtn.contains(e.target) && !gridWrap.contains(e.target) && pickerOpen) {
-		toggleTimePicker();
-	}
-});
+		/* ── Fill form from Available Slot card ── */
+		function fillSlot(date, time24, roomId) {
+			document.getElementById('meeting-date').value = date;
+			// Set time picker
+			hiddenInput.value = time24;
+			const matchBtn = document.querySelector(`.time-btn[data-value="${time24}"]`);
+			document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+			if (matchBtn) {
+				matchBtn.classList.add('active');
+				displayText.textContent = matchBtn.textContent.trim();
+			} else {
+				displayText.textContent = time24;
+			}
+			displayText.classList.add('selected');
+			// Set room
+			document.getElementById('room').value = roomId;
+			// Scroll to form top
+			document.getElementById('meeting-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
 
-/* ── Fill form from Available Slot card ── */
-function fillSlot(date, time24, roomId) {
-	document.getElementById('meeting-date').value = date;
-	// Set time picker
-	hiddenInput.value = time24;
-	const matchBtn = document.querySelector(`.time-btn[data-value="${time24}"]`);
-	document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-	if (matchBtn) {
-		matchBtn.classList.add('active');
-		displayText.textContent = matchBtn.textContent.trim();
-	} else {
-		displayText.textContent = time24;
-	}
-	displayText.classList.add('selected');
-	// Set room
-	document.getElementById('room').value = roomId;
-	// Scroll to form top
-	document.getElementById('meeting-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-/* ── Fill form from Re-book card (no date change) ── */
-function fillRebook(time24, roomId, title) {
-	document.getElementById('meeting-title').value = title;
-	hiddenInput.value = time24;
-	const matchBtn = document.querySelector(`.time-btn[data-value="${time24}"]`);
-	document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-	if (matchBtn) {
-		matchBtn.classList.add('active');
-		displayText.textContent = matchBtn.textContent.trim();
-	} else {
-		displayText.textContent = time24;
-	}
-	displayText.classList.add('selected');
-	document.getElementById('room').value = roomId;
-	document.getElementById('meeting-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-</script>
+		/* ── Fill form from Re-book card (no date change) ── */
+		function fillRebook(time24, roomId, title) {
+			document.getElementById('meeting-title').value = title;
+			hiddenInput.value = time24;
+			const matchBtn = document.querySelector(`.time-btn[data-value="${time24}"]`);
+			document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+			if (matchBtn) {
+				matchBtn.classList.add('active');
+				displayText.textContent = matchBtn.textContent.trim();
+			} else {
+				displayText.textContent = time24;
+			}
+			displayText.classList.add('selected');
+			document.getElementById('room').value = roomId;
+			document.getElementById('meeting-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
+	</script>
 </body>
+
 </html>
