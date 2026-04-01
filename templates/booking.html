@@ -366,10 +366,9 @@
 				<label for="room">Room</label>
 				<select id="room" name="room" required>
 					<option value="">Choose a room</option>
-					{% for room in rooms %}
-					<option value="{{ room.id }}" {% if prev_room==room.id|stringformat:"s" %}selected{% endif %}>{{
-						room.name }}</option>
-					{% endfor %}
+					{% for room in rooms %}{% with room_id_str=room.id|stringformat:"s" %}
+					<option value="{{ room.id }}" {% if prev_room == room_id_str %}selected{% endif %}>{{ room.name }}</option>
+					{% endwith %}{% endfor %}
 				</select>
 
 				<button type="submit" class="primary-btn full">
