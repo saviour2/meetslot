@@ -1,0 +1,65 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard</title>
+		<link rel="stylesheet" href="{% static 'style.css' %}" />
+	</head>
+	<body class="app-page">
+		<header class="app-header">
+			<p class="app-logo">MeetSlot</p>
+			<nav>
+				<ul class="app-nav">
+					<li><a class="active" href="{% url 'dashboard' %}">Dashboard</a></li>
+					<li><a href="{% url 'booking' %}">Booking</a></li>
+					<li><a href="{% url 'status' %}">Status</a></li>
+				</ul>
+			</nav>
+			<form method="post" action="{% url 'logout' %}">
+				{% csrf_token %}
+				<button type="submit" class="logout-btn">Logout</button>
+			</form>
+		</header>
+
+		<main class="app-shell">
+			<section class="hero-panel">
+				<p class="eyebrow">Workspace Overview</p>
+				<h1>Dashboard</h1>
+				{% if next_booking %}
+				<p>
+					Next booking: {{ next_booking.title }} on {{ next_booking.meeting_date
+					}} at {{ next_booking.meeting_time|time:"h:i A" }} in {{
+					next_booking.room.name }}.
+				</p>
+				{% else %}
+				<p>
+					Track your meetings, monitor active requests, and jump into your next
+					booking in one place.
+				</p>
+				{% endif %}
+			</section>
+
+			<section class="stats-grid">
+				{% for stat in stats %}
+				<article class="glass-card stat-card">
+					<h3>{{ stat.label }}</h3>
+					<p class="stat-value">{{ stat.value }}</p>
+					<p class="stat-note">{{ stat.note }}</p>
+				</article>
+				{% endfor %}
+			</section>
+
+			<section class="glass-card quick-actions">
+				<h2>Quick Actions</h2>
+				<div class="action-row">
+					<a href="{% url 'booking' %}" class="primary-btn"
+						>Create New Booking</a
+					>
+					<a href="{% url 'status' %}" class="ghost-btn">View Status Updates</a>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

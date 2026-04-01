@@ -1,0 +1,78 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Booking</title>
+		<link rel="stylesheet" href="{% static 'style.css' %}" />
+	</head>
+	<body class="app-page">
+		<header class="app-header">
+			<p class="app-logo">MeetSlot</p>
+			<nav>
+				<ul class="app-nav">
+					<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+					<li><a class="active" href="{% url 'booking' %}">Booking</a></li>
+					<li><a href="{% url 'status' %}">Status</a></li>
+				</ul>
+			</nav>
+			<form method="post" action="{% url 'logout' %}">
+				{% csrf_token %}
+				<button type="submit" class="logout-btn">Logout</button>
+			</form>
+		</header>
+
+		<main class="app-shell two-col">
+			<section class="glass-card">
+				<p class="eyebrow">Plan A Session</p>
+				<h1>Booking Page</h1>
+				<form class="booking-form" method="post">
+					{% csrf_token %}
+					<label for="meeting-title">Meeting Title</label>
+					<input
+						id="meeting-title"
+						name="meeting_title"
+						type="text"
+						placeholder="Sprint planning"
+						required
+					/>
+
+					<label for="meeting-date">Date</label>
+					<input id="meeting-date" name="meeting_date" type="date" required />
+
+					<label for="meeting-time">Time</label>
+					<input id="meeting-time" name="meeting_time" type="time" required />
+
+					<label for="room">Room</label>
+					<select id="room" name="room" required>
+						<option value="">Choose a room</option>
+						{% for room in rooms %}
+						<option value="{{ room.id }}">{{ room.name }}</option>
+						{% endfor %}
+					</select>
+
+					<button type="submit" class="primary-btn full">
+						Confirm Booking
+					</button>
+				</form>
+			</section>
+
+			<section class="glass-card">
+				<h2>Popular Slots</h2>
+				<p class="panel-copy">
+					Hover to preview demand level for each timeslot.
+				</p>
+				<div class="slot-cloud">
+					{% for slot in popular_slots %}
+					<button type="button" class="slot-chip">{{ slot }}</button>
+					{% empty %}
+					<p class="empty-copy">
+						No slot history yet. Your new bookings will appear here.
+					</p>
+					{% endfor %}
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

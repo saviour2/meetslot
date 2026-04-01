@@ -1,0 +1,50 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="{% static 'style.css' %}" />
+		<title>Home</title>
+	</head>
+	<body class="home-page">
+		<main class="auth-shell">
+			<section class="auth-card" aria-labelledby="auth-title">
+				<p class="auth-brand">MeetSlot</p>
+				<h1 id="auth-title">Welcome back</h1>
+				<p class="auth-subtitle">
+					Login to manage bookings and track your meeting slots faster.
+				</p>
+
+				<form class="auth-form" method="post" action="{% url 'home' %}">
+					{% csrf_token %} {% if error_message %}
+					<p class="auth-error">{{ error_message }}</p>
+					{% endif %}
+					<label for="u_name">Username</label>
+					<input
+						type="text"
+						name="username"
+						id="u_name"
+						placeholder="Enter your username"
+						required
+					/>
+
+					<label for="pass">Password</label>
+					<input
+						type="password"
+						name="password"
+						id="pass"
+						placeholder="Enter your password"
+						required
+					/>
+
+					<button type="submit">Login</button>
+				</form>
+
+				<p class="auth-footnote">
+					New here? Create an account from the dashboard setup.
+				</p>
+			</section>
+		</main>
+	</body>
+</html>

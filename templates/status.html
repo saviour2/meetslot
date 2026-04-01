@@ -1,0 +1,56 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Status</title>
+		<link rel="stylesheet" href="{% static 'style.css' %}" />
+	</head>
+	<body class="app-page">
+		<header class="app-header">
+			<p class="app-logo">MeetSlot</p>
+			<nav>
+				<ul class="app-nav">
+					<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+					<li><a href="{% url 'booking' %}">Booking</a></li>
+					<li><a class="active" href="{% url 'status' %}">Status</a></li>
+				</ul>
+			</nav>
+			<form method="post" action="{% url 'logout' %}">
+				{% csrf_token %}
+				<button type="submit" class="logout-btn">Logout</button>
+			</form>
+		</header>
+
+		<main class="app-shell">
+			<section class="hero-panel compact">
+				<p class="eyebrow">Booking Timeline</p>
+				<h1>Booking History</h1>
+			</section>
+
+			<section class="status-list">
+				{% for booking in booking_items %}
+				<article class="glass-card status-item">
+					<div>
+						<h3>{{ booking.title }}</h3>
+						<p>
+							{{ booking.meeting_date }} at {{ booking.meeting_time|time:"h:i A"
+							}} - {{ booking.room.name }}
+						</p>
+					</div>
+					<span class="chip {{ booking.status }}"
+						>{{ booking.get_status_display }}</span
+					>
+				</article>
+				{% empty %}
+				<article class="glass-card">
+					<p class="empty-copy">
+						No bookings yet. Create one from the booking page.
+					</p>
+				</article>
+				{% endfor %}
+			</section>
+		</main>
+	</body>
+</html>
