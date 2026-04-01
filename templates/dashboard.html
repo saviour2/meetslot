@@ -29,9 +29,7 @@
 				<h1>Dashboard</h1>
 				{% if next_booking %}
 				<p>
-					Next booking: {{ next_booking.title }} on {{ next_booking.meeting_date
-					}} at {{ next_booking.meeting_time|time:"h:i A" }} in {{
-					next_booking.room.name }}.
+					Next booking: {{ next_booking.title }} on {{ next_booking.meeting_date }} at {{ next_booking.meeting_time|time:"h:i A" }} in {{ next_booking.room.name }}.
 				</p>
 				{% else %}
 				<p>
