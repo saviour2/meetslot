@@ -401,17 +401,16 @@
 			{% if recent_bookings %}
 			<p class="rec-section-label">🔄 Re-book Recent</p>
 			<div class="rec-grid">
-				{% for b in recent_bookings %}
-				<div class="rec-card rebook" data-time="{{ b.meeting_time|time:'H:i' }}" data-room="{{ b.room.id }}"
-					data-title="{{ b.title }}"
+				{% for b in recent_bookings %}{% with btime=b.meeting_time|time:"H:i" %}
+				<div class="rec-card rebook" data-time="{{ btime }}" data-room="{{ b.room.id }}"
+					data-title="{{ b.title|escapejs }}"
 					onclick="fillRebook(this.dataset.time, this.dataset.room, this.dataset.title)">
 					<div class="rec-card-room">{{ b.room.name }}</div>
 					<div class="rec-card-time">{{ b.meeting_time|time:"g:i A" }}</div>
-					<div class="rec-card-date" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{
-						b.title }}</div>
+					<div class="rec-card-date" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ b.title }}</div>
 					<span class="rec-card-arrow">→</span>
 				</div>
-				{% endfor %}
+			{% endwith %}{% endfor %}
 			</div>
 			{% endif %}
 

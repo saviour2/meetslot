@@ -224,7 +224,7 @@ def edit_booking(request, booking_id):
     We temporarily delete the old booking so the new slot check is clean."""
     if request.method == 'POST':
         booking = get_object_or_404(Booking, id=booking_id, created_by=request.user)
-        if booking.status == Booking.Status.RESCHEDULE:
+        if booking.status in (Booking.Status.RESCHEDULE, Booking.Status.APPROVED):
             room_id = request.POST.get('room')
             title = request.POST.get('meeting_title', booking.title).strip() or booking.title
             meeting_date = request.POST.get('meeting_date')
