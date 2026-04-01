@@ -27,6 +27,11 @@
 			<section class="glass-card">
 				<p class="eyebrow">Plan A Session</p>
 				<h1>Booking Page</h1>
+                {% if error %}
+                <div class="error-banner" style="background: rgba(255,0,0,0.1); padding: 10px; border-radius: 8px; margin-bottom: 1rem;">
+                    <p style="color: #ff4d4f; font-weight: bold; margin: 0;">{{ error }}</p>
+                </div>
+                {% endif %}
 				<form class="booking-form" method="post">
 					{% csrf_token %}
 					<label for="meeting-title">Meeting Title</label>

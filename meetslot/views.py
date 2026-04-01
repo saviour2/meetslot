@@ -3,7 +3,7 @@ from datetime import timedelta
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
 
 from .models import Booking, Room
@@ -66,6 +66,7 @@ def dashboard(request):
 @login_required(login_url='home')
 def booking(request):
     rooms = Room.objects.filter(is_active=True)
+    error_message = None
 
     if request.method == 'POST':
         room_id = request.POST.get('room')
@@ -76,14 +77,25 @@ def booking(request):
         if title and meeting_date and meeting_time and room_id:
             room = rooms.filter(id=room_id).first()
             if room is not None:
-                Booking.objects.create(
-                    title=title,
+                # Availability Checking: check if a non-rescheduled booking exists
+                conflict = Booking.objects.filter(
+                    room=room,
                     meeting_date=meeting_date,
                     meeting_time=meeting_time,
-                    room=room,
-                    created_by=request.user,
-                )
-                return redirect('status')
+                    status__in=[Booking.Status.PENDING, Booking.Status.APPROVED]
+                ).exists()
+
+                if conflict:
+                    error_message = "Room is already booked for this specific date and time."
+                else:
+                    Booking.objects.create(
+                        title=title,
+                        meeting_date=meeting_date,
+                        meeting_time=meeting_time,
+                        room=room,
+                        created_by=request.user,
+                    )
+                    return redirect('status')
 
     week_from_today = timezone.localdate() + timedelta(days=7)
     popular_slots_qs = (
@@ -97,6 +109,7 @@ def booking(request):
     context = {
         'rooms': rooms,
         'popular_slots': popular_slots,
+        'error': error_message,
     }
     return render(request, 'booking.html', context)
 
@@ -116,3 +129,12 @@ def logout_view(request):
     if request.method == 'POST':
         logout(request)
     return redirect('home')
+
+@login_required(login_url='home')
+def delete_booking(request, booking_id):
+    if request.method == 'POST':
+        booking = get_object_or_404(Booking, id=booking_id, created_by=request.user)
+        # Ensure only pending bookings can be deleted
+        if booking.status == Booking.Status.PENDING:
+            booking.delete()
+    return redirect('status')

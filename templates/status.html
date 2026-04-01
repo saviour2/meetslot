@@ -35,13 +35,26 @@
 					<div>
 						<h3>{{ booking.title }}</h3>
 						<p>
-							{{ booking.meeting_date }} at {{ booking.meeting_time|time:"h:i A"
-							}} - {{ booking.room.name }}
+							{{ booking.meeting_date }} at {{ booking.meeting_time|time:"h:i A" }} - {{ booking.room.name }}
 						</p>
 					</div>
-					<span class="chip {{ booking.status }}"
-						>{{ booking.get_status_display }}</span
-					>
+					<div style="display: flex; align-items: center; gap: 0.5rem;">
+						<span class="chip {{ booking.status }}"
+							>{{ booking.get_status_display }}</span
+						>
+						{% if booking.status == 'pending' %}
+						<form method="post" action="{% url 'delete_booking' booking.id %}" class="delete-booking-form" style="margin: 0;">
+							{% csrf_token %}
+							<button type="submit" style="background: none; border: none; cursor: pointer; color: #dc2626; padding: 4px; display: flex; align-items: center; border-radius: 4px; transition: background-color 0.2s ease;" aria-label="Delete" onmouseover="this.style.backgroundColor='#fee2e2'" onmouseout="this.style.backgroundColor='transparent'">
+								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M3 6h18"></path>
+									<path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+									<path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+								</svg>
+							</button>
+						</form>
+						{% endif %}
+					</div>
 				</article>
 				{% empty %}
 				<article class="glass-card">
@@ -52,5 +65,53 @@
 				{% endfor %}
 			</section>
 		</main>
+
+		<!-- Delete Confirmation Modal -->
+		<div id="deleteModal" class="modal-overlay" style="display: none;">
+			<div class="glass-card modal-content" style="padding: 2rem; max-width: 420px; width: 100%; border-radius: 24px; animation: rise 300ms ease-out;">
+				<h2 style="font-family: 'Fraunces', serif; font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--ink-900);">Delete Booking</h2>
+				<p style="color: var(--ink-700); line-height: 1.6; margin-bottom: 1.5rem;">Are you sure you want to delete this pending booking? This action cannot be undone.</p>
+				<div style="display: flex; justify-content: flex-end; gap: 0.8rem;">
+					<button type="button" class="ghost-btn" id="cancelDeleteBtn">Cancel</button>
+					<button type="button" class="primary-btn danger-btn" id="confirmDeleteBtn">Delete</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const modal = document.getElementById('deleteModal');
+				const cancelBtn = document.getElementById('cancelDeleteBtn');
+				const confirmBtn = document.getElementById('confirmDeleteBtn');
+				let formToSubmit = null;
+
+				document.querySelectorAll('.delete-booking-form').forEach(form => {
+					form.addEventListener('submit', function(e) {
+						e.preventDefault();
+						formToSubmit = this;
+						modal.style.display = 'flex';
+					});
+				});
+
+				const closeModal = () => {
+					modal.style.display = 'none';
+					formToSubmit = null;
+				};
+
+				cancelBtn.addEventListener('click', closeModal);
+
+				confirmBtn.addEventListener('click', () => {
+					if (formToSubmit) {
+						formToSubmit.submit();
+					}
+				});
+
+				modal.addEventListener('click', (e) => {
+					if (e.target === modal) {
+						closeModal();
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
