@@ -351,7 +351,7 @@
 		<p class="rec-section-label">🔄 Re-book Recent</p>
 		<div class="rec-grid">
 			{% for b in recent_bookings %}
-			<div class="rec-card rebook" onclick="fillRebook('{{ b.meeting_time|time:'H:i' }}','{{ b.room.id }}','{{ b.title }}')">
+			<div class="rec-card rebook" data-time="{{ b.meeting_time|time:'H:i' }}" data-room="{{ b.room.id }}" data-title="{{ b.title }}" onclick="fillRebook(this.dataset.time, this.dataset.room, this.dataset.title)">
 				<div class="rec-card-room">{{ b.room.name }}</div>
 				<div class="rec-card-time">{{ b.meeting_time|time:"g:i A" }}</div>
 				<div class="rec-card-date" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ b.title }}</div>
