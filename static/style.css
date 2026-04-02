@@ -179,6 +179,18 @@ h1 {
 	background: linear-gradient(135deg, var(--teal-600), var(--teal-500));
 	color: var(--white);
 	box-shadow: 0 8px 20px rgba(29, 122, 134, 0.28);
+	view-transition-name: nav-active-pill;
+}
+
+::view-transition-group(nav-active-pill) {
+	animation-duration: 0.35s;
+	animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+::view-transition-old(nav-active-pill),
+::view-transition-new(nav-active-pill) {
+	width: 100%;
+	height: 100%;
 }
 
 .logout-btn {

@@ -1,68 +1,66 @@
 # MeetSlot
 
-MeetSlot is a Django-based booking dashboard with authentication, themed UI pages, and database-backed room and meeting management.
+MeetSlot is a Django-based booking dashboard with authentication, themed UI pages, database-backed room management, and a smart auto-rescheduling system.
 
-## Features
+## ✨ Features
 
-- Login/logout workflow
-- Dashboard with dynamic booking stats
-- Booking form with room selection from database
-- Status page with booking history and state chips
-- MySQL-ready database configuration through environment variables
+- **Smart Auto-Rescheduling:** Automatically finds the next available time slot for conflicting bookings and transparently slots users in with a "Reschedule" status.
+- **Smart Suggestions:** The system scans for upcoming available slots and lets users instantly auto-fill the form with 1 click.
+- **Recent Re-books:** Quickly clone previous meeting details from the Booking panel.
+- **Fluid UI Animations:** Modern, cross-browser page transitions using the `View Transitions API` for seamless navigation.
+- **Custom Pickers:** Enhanced grid-based time picker that ditches clunky native browser wheels.
+- **Database & Auth:** Includes full user authentication and integrates with MySQL (or SQLite fallback) for production readiness.
 
-## Project Structure
+## 🛠️ Project Structure
 
 - `manage.py` - Django entrypoint
-- `meetslot/settings.py` - app and security configuration
-- `meetslot/models.py` - Room and Booking models
-- `meetslot/views.py` - page logic and auth flow
-- `templates/` - HTML templates
-- `static/` - CSS assets
+- `meetslot/settings.py` - App and security configuration
+- `meetslot/models.py` - Room and Booking models (includes signal logic)
+- `meetslot/views.py` - Page routing, data context, and auth workflow
+- `templates/` - HTML templates (`home.html`, `dashboard.html`, `booking.html`, `status.html`)
+- `static/` - CSS styling and design system
 
-## Prerequisites
+## 🚀 Setup & Installation
 
-- Python 3.13+
-- pip
-- MySQL Server (optional, for production-like setup)
+**1. Create and activate a Virtual Environment:**
+```bash
+python -m venv venv
+venv\Scripts\activate  # Windows
+# or
+source venv/bin/activate # Mac/Linux
+```
 
-## Setup
-
-1. Create and activate virtual environment.
-2. Install dependencies:
-
+**2. Install dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Copy environment template and update values:
-
+**3. Configure Environment Variables:**
+Copy the template and modify the credentials (e.g., your database connection string):
 ```bash
 cp .env.example .env
 ```
 
-4. Run migrations:
-
+**4. Run Migrations:**
 ```bash
 python manage.py migrate
 ```
 
-5. Create admin user (optional):
-
+**5. Create a Superuser (Admin):**
 ```bash
 python manage.py createsuperuser
 ```
 
-6. Start development server:
-
+**6. Start Development Server:**
 ```bash
 python manage.py runserver
 ```
 
-## Database Configuration
+## 🗄️ Database Configuration
 
-By default, the project runs on SQLite for quick local setup.
+By default, the project runs on **SQLite** for rapid local setup.
 
-To use MySQL, set these values in your environment:
+To use **MySQL**, ensure the `mysqlclient` package is installed and set these values in your `.env` file:
 
 - `DB_ENGINE=django.db.backends.mysql`
 - `DB_NAME=<database_name>`
@@ -71,31 +69,11 @@ To use MySQL, set these values in your environment:
 - `DB_HOST=<database_host>`
 - `DB_PORT=<database_port>`
 
-Then run:
+Then execute `python manage.py migrate` to structure your database.
 
-```bash
-python manage.py migrate
-```
+## 🔒 Security Notes
 
-## Security Notes
-
-- Do not commit `.env`, database files, or local virtual environment folders.
-- Use `DJANGO_SECRET_KEY` from environment in non-debug deployments.
+- Do not commit `.env`, `.sqlite3` files, or your `venv/` folder.
+- Use `DJANGO_SECRET_KEY` in non-debug deployments.
 - Set `DJANGO_DEBUG=False` in production.
-- Set `ALLOWED_HOSTS` to your deployment hostnames.
-
-## Routes
-
-- `/` -> Login page
-- `/dashboard/` -> Dashboard
-- `/booking/` -> Booking page
-- `/status/` -> Booking status history
-- `/logout/` -> Logout endpoint (POST)
-
-## Test User
-
-You can create/update a local test user with:
-
-```bash
-python manage.py shell -c "from django.contrib.auth import get_user_model; User=get_user_model(); u,_=User.objects.get_or_create(username='testuser1', defaults={'email':'testuser1@example.com'}); u.set_password('Test@12345'); u.is_active=True; u.save()"
-```
+- Ensure `ALLOWED_HOSTS` represents your valid deployment hostnames.
