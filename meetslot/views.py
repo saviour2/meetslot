@@ -3,7 +3,7 @@ from datetime import timedelta
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
 
@@ -43,28 +43,38 @@ def homepage(request):
 @login_required(login_url='home')
 def dashboard(request):
     user_bookings = Booking.objects.filter(created_by=request.user)
-    today = timezone.localdate()
+    now = timezone.localtime()
+    today = now.date()
+    now_time = now.time()
+
+    # "Upcoming" count shows only Approved bookings
+    # "Pending" count includes both Pending and Reschedule statuses
+    upcoming_active = user_bookings.filter(status=Booking.Status.APPROVED)
+    pending_count = user_bookings.filter(
+        status__in=[Booking.Status.PENDING, Booking.Status.RESCHEDULE]
+    ).count()
 
     stats = [
         {
             'label': 'Upcoming',
-            'value': user_bookings.filter(meeting_date__gte=today).count(),
+            'value': upcoming_active.count(),
             'note': 'Meetings ahead',
         },
         {
             'label': 'Pending',
-            'value': user_bookings.filter(status=Booking.Status.PENDING).count(),
+            'value': pending_count,
             'note': 'Awaiting confirmation',
         },
         {
             'label': 'Rooms Used',
-            'value': user_bookings.values('room').distinct().count(),
+            'value': upcoming_active.values('room').distinct().count(),
             'note': 'Across your bookings',
         },
     ]
 
+    # Next booking shows the earliest Approved booking from today onwards
     next_booking = (
-        user_bookings.filter(meeting_date__gte=today)
+        upcoming_active.filter(meeting_date__gte=today)
         .select_related('room')
         .order_by('meeting_date', 'meeting_time')
         .first()
